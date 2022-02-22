@@ -1,52 +1,52 @@
 const database = require('../models')
 
 class TurmaController {
-  static async pegaTodasAsTurmas(req, res){
+  static async getAllTeam(req, res){
     try {
-      const todasAsTurmas = await database.Turmas.findAll()
-      return res.status(200).json(todasAsTurmas)  
+      const allTeam = await database.Turmas.findAll()
+      return res.status(200).json(allTeam)  
     } catch (error) {
       return res.status(500).json(error.message)
     }
   }
 
-  static async pegaUmaTurma(req, res) {
+  static async getOneTeam(req, res) {
     const { id } = req.params
     try {
-      const umaTurma = await database.Turmas.findOne( { 
+      const oneTeam = await database.Turmas.findOne( { 
         where: { 
           id: Number(id) 
         }
       })
-      return res.status(200).json(umaTurma)
+      return res.status(200).json(oneTeam)
     } catch (error) {
       return res.status(500).json(error.message)
     }
   }
 
-  static async criaTurma(req, res) {
-    const novaTurma = req.body
+  static async createTeam(req, res) {
+    const team = req.body
     try {
-      const novaTurmaCriada = await database.Turmas.create(novaTurma)
-      return res.status(200).json(novaTurmaCriada)
+      const teamCreated = await database.Turmas.create(team)
+      return res.status(200).json(teamCreated)
     } catch (error) {
       return res.status(500).json(error.message)
     }
   }
 
-  static async atualizaTurma(req, res) {
+  static async updateTeam(req, res) {
     const { id } = req.params
-    const novasInfos = req.body
+    const infos = req.body
     try {
-      await database.Turmas.update(novasInfos, { where: { id: Number(id) }})
-      const turmaAtualizada = await database.Turmas.findOne( { where: { id: Number(id) }})
-      return res.status(200).json(turmaAtualizada)
+      await database.Turmas.update(infos, { where: { id: Number(id) }})
+      const teamUpdated = await database.Turmas.findOne( { where: { id: Number(id) }})
+      return res.status(200).json(teamUpdated)
     } catch (error) {
       return res.status(500).json(error.message)
     }
   }
 
-  static async apagaTurma(req, res) {
+  static async deleteTeam(req, res) {
     const { id } = req.params
     try {
       await database.Turmas.destroy({ where: { id: Number(id) }})

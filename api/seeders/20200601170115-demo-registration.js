@@ -1,45 +1,45 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
-		return queryInterface.bulkInsert('Matriculas', [
+		return queryInterface.bulkInsert('Registration', [
 			{
-				status: "confirmado",
-				estudante_id: 1,
-				turma_id: 1,
+				status: "confirmed",
+				student_id: 1,
+				team_id: 1,
 				createdAt: new Date(),
 				updatedAt: new Date()
 		},
 		{
-			status: "confirmado",
-			estudante_id: 2,
-			turma_id: 1,
+			status: "confirmed",
+			student_id: 2,
+			team_id: 1,
 			createdAt: new Date(),
 			updatedAt: new Date()
 	},
 		{
-			status: "confirmado",
-			estudante_id: 3,
-			turma_id: 2,
+			status: "confirmed",
+			student_id: 3,
+			team_id: 2,
 			createdAt: new Date(),
 			updatedAt: new Date()
 	},
 		{
-			status: "confirmado",
-			estudante_id: 4,
-			turma_id: 3,
+			status: "confirmed",
+			student_id: 4,
+			team_id: 3,
 			createdAt: new Date(),
 			updatedAt: new Date()
 	},
 		{
-			status: "cancelado",
-			estudante_id: 1,
-			turma_id: 2,
+			status: "canceled",
+			student_id: 1,
+			team_id: 2,
 			createdAt: new Date(),
 			updatedAt: new Date()
 	},
 		{
-			status: "cancelado",
-			estudante_id: 2,
-			turma_id: 2,
+			status: "canceled",
+			student_id: 2,
+			team_id: 2,
 			createdAt: new Date(),
 			updatedAt: new Date()
 		}
@@ -47,6 +47,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-		return queryInterface.bulkDelete('Matriculas', null, {})
+		return queryInterface.bulkDelete('Registration', null, {})
   }
 }
