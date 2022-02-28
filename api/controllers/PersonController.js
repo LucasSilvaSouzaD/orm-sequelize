@@ -3,7 +3,7 @@ const database = require('../models')
 class PessoaController {
   static async getAllPeople(req, res){
     try {
-      const allPeople = await database.Pessoas.findAll()
+      const allPeople = await database.People.findAll()
       return res.status(200).json(allPeople)  
     } catch (error) {
       return res.status(500).json(error.message)
@@ -13,7 +13,7 @@ class PessoaController {
   static async getOnePerson(req, res) {
     const { id } = req.params
     try {
-      const person = await database.Pessoas.findOne( { 
+      const person = await database.People.findOne( { 
         where: { 
           id: Number(id) 
         }
@@ -27,7 +27,7 @@ class PessoaController {
   static async createPerson(req, res) {
     const person = req.body
     try {
-      const personCreated = await database.Pessoas.create(person)
+      const personCreated = await database.People.create(person)
       return res.status(200).json(personCreated)
     } catch (error) {
       return res.status(500).json(error.message)
@@ -38,8 +38,8 @@ class PessoaController {
     const { id } = req.params
     const infos = req.body
     try {
-      await database.Pessoas.update(infos, { where: { id: Number(id) }})
-      const personUpdated = await database.Pessoas.findOne( { where: { id: Number(id) }})
+      await database.People.update(infos, { where: { id: Number(id) }})
+      const personUpdated = await database.People.findOne( { where: { id: Number(id) }})
       return res.status(200).json(personUpdated)
     } catch (error) {
       return res.status(500).json(error.message)
@@ -49,9 +49,34 @@ class PessoaController {
   static async deletePerson(req, res) {
     const { id } = req.params
     try {
-      await database.Pessoas.destroy({ where: { id: Number(id) }})
+      await database.People.destroy({ where: { id: Number(id) }})
       return res.status(200).json({ mensagem: `id ${id} deleted` })
 
+    } catch (error) {
+      return res.status(500).json(error.message)
+    }
+  }
+
+  static async restorePerson(req, res) {
+    const { id } = req.params
+    try {
+      await database.People.restore({ where: { id: Number(id) }})
+      return res.status(200).json({ mensage: `${id} restore success`})
+    } catch (error) {
+
+    }
+  }
+
+  static async restoreRegistration(req, res) {
+    const { studentId, registrationId } = req.params
+    try {
+      await database.Registration.restore({
+        where: {
+          id: Number(registrationId),
+          studentId: Number(studentId)
+        }
+      })
+      return res.status(200).json({ mensagem: `id ${id} restore`})
     } catch (error) {
       return res.status(500).json(error.message)
     }

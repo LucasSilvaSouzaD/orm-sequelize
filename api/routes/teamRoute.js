@@ -8,4 +8,7 @@ router
  .post('/team', TeamController.createTeam)
  .put('/team/:id', TeamController.updateTeam)
  .delete('/team/:id', TeamController.deleteTeam)
+ .post('/team/:id/restore', TeamController.restoreTeam)
+
+ 
 module.exports = router

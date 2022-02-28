@@ -2,7 +2,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Team = sequelize.define('Team', {
     date_start: DataTypes.DATEONLY
-  }, {});
+  }, { paranoid: true });
   Team.associate = function(models) {
     Team.hasMany(models.Registration, {
       foreignKey: 'team_id'
